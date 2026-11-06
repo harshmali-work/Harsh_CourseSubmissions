@@ -51,8 +51,9 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
         title: const Text('Add new Place'),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.all(24), // Increased padding for a cleaner, modern layout
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch, // Stretches elements to full width
           children: [
             TextField(
               decoration: const InputDecoration(labelText: 'Title'),
@@ -61,24 +62,37 @@ class _AddPlaceScreenState extends ConsumerState<AddPlaceScreen> {
                 color: Theme.of(context).colorScheme.onBackground,
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24), // Increased spacing for better UI breathing room
             ImageInput(
               onPickImage: (image) {
                 _selectedImage = image;
               },
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             // 4. Hooking up the callback to grab the location from LocationInput
             LocationInput(
               onSelectLocation: (location) {
                 _selectedLocation = location;
               },
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
             ElevatedButton.icon(
               onPressed: _savePlace,
-              icon: const Icon(Icons.add),
-              label: const Text('Add Place'),
+              icon: const Icon(Icons.add_rounded),
+              label: const Text(
+                'Add Place',
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Theme.of(context).colorScheme.primary, // Vibrant Blue
+                foregroundColor: Colors.white, // Crisp white text
+                elevation: 2,
+                shadowColor: Theme.of(context).colorScheme.primary.withOpacity(0.4),
+                padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 32),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
             ),
           ],
         ),

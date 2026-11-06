@@ -34,10 +34,26 @@ class _ImageInputState extends State<ImageInput> {
 
   @override
   Widget build(BuildContext context) {
-    Widget content = TextButton.icon(
-      icon: const Icon(Icons.camera),
-      label: const Text('Take Picture'),
-      onPressed: _takePicture,
+    Widget content = GestureDetector(
+      onTap: _takePicture,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(
+            Icons.camera_alt_rounded,
+            size: 42,
+            color: Theme.of(context).colorScheme.primary, // Vibrant Blue
+          ),
+          const SizedBox(height: 8),
+          Text(
+            'Take Picture',
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.primary,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
     );
 
     if (_selectedImage != null) {
@@ -54,14 +70,17 @@ class _ImageInputState extends State<ImageInput> {
 
     return Container(
       decoration: BoxDecoration(
+        color: const Color(0xFFF0F4F8), // Soft bright light blue-grey background
+        borderRadius: BorderRadius.circular(16), // Softer rounded corners
         border: Border.all(
-          width: 1,
-          color: Theme.of(context).colorScheme.primary.withOpacity(0.2),
+          width: 1.5,
+          color: Theme.of(context).colorScheme.primary.withOpacity(0.15),
         ),
       ),
       height: 250,
       width: double.infinity,
       alignment: Alignment.center,
+      clipBehavior: Clip.antiAlias, // Ensures the photo respects the rounded corners
       child: content,
     );
   }
