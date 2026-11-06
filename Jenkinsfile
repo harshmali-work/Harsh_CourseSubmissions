@@ -31,7 +31,7 @@ pipeline {
                 echo 'Compiling Signed Release Android App Bundle...'
                 withCredentials([
                     file(credentialsId: 'android-keystore-file', variable: 'KEYSTORE_FILE'),
-                    string(credentialsId: 'keystore-password', variable: 'KEY_PASSWORD')
+                    string(credentialsId: 'keystore-password.Verification', variable: 'KEY_PASSWORD')
                 ]) {
                     sh '''
                         cp $KEYSTORE_FILE android/app/upload-keystore.jks
