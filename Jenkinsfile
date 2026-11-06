@@ -4,7 +4,6 @@ pipeline {
         buildDiscarder(logRotator(numToKeepStr: '5', artifactNumToKeepStr: '2'))
         timeout(time: 30, unit: 'MINUTES')
     }
-    ///harsh
     environment {
         PATH = "${WORKSPACE}/flutter/bin:${PATH}"
         ANDROID_HOME = "/opt/android-sdk"
@@ -29,8 +28,21 @@ pipeline {
         }
         stage('Build Artifact (AAB)') {
             steps {
-                echo 'Compiling Android App Bundle...'
-                sh 'flutter build appbundle --release'
+                echo 'Compiling Signed Release Android App Bundle...'
+                withCredentials([
+                    file(credentialsId: 'android-keystore-file', variable: 'KEYSTORE_FILE'),
+                    string(credentialsId: 'keystore-password', variable: 'KEY_PASSWORD')
+                ]) {
+                    sh '''
+                        cp $KEYSTORE_FILE android/app/upload-keystore.jks
+                        echo "storePassword=$KEY_PASSWORD" > android/key.properties
+                        echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+                        echo "keyAlias=upload" >> android/key.properties
+                        echo "storeFile=upload-keystore.jks" >> android/key.properties
+                        
+                        flutter build appbundle --release
+                    '''
+                }
             }
         }
     }
