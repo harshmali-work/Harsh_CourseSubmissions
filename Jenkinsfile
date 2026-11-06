@@ -30,9 +30,9 @@ pipeline {
             steps {
                 echo 'Compiling Signed Release Android App Bundle...'
                 withCredentials([
-                    file(credentialsId: 'android-keystore-file', variable: 'KEYSTORE_FILE'),
-                    string(credentialsId: 'keystore-password.Verification', variable: 'KEY_PASSWORD')
-                ]) {
+    file(credentialsId: 'android-keystore-file', variable: 'KEYSTORE_FILE'),
+    string(credentialsId: 'keystore-password', variable: 'KEY_PASSWORD')
+]) {
                     sh '''
                         mkdir -p android/app
                         chmod -R 777 android/app
