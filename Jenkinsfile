@@ -35,7 +35,8 @@ pipeline {
                 ]) {
                     sh '''
                         mkdir -p android/app
-                        chmod +w android/app
+                        chmod -R 777 android/app
+                        rm -f android/app/upload-keystore.jks
                         cp $KEYSTORE_FILE android/app/upload-keystore.jks
                         echo "storePassword=$KEY_PASSWORD" > android/key.properties
                         echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
