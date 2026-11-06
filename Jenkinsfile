@@ -34,6 +34,7 @@ pipeline {
                     string(credentialsId: 'keystore-password.Verification', variable: 'KEY_PASSWORD')
                 ]) {
                     sh '''
+                        mkdir -p android/app
                         cp $KEYSTORE_FILE android/app/upload-keystore.jks
                         echo "storePassword=$KEY_PASSWORD" > android/key.properties
                         echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
