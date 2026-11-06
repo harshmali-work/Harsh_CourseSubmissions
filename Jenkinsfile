@@ -38,8 +38,12 @@ pipeline {
                         chmod -R 777 android/app
                         rm -f android/app/upload-keystore.jks
                         cp $KEYSTORE_FILE android/app/upload-keystore.jks
-                        echo "storePassword=$KEY_PASSWORD" > android/key.properties
-                        echo "keyPassword=$KEY_PASSWORD" >> android/key.properties
+                        
+                        # Strip any hidden newlines or carriage returns from the credential
+                        CLEAN_PASSWORD=$(echo "$KEY_PASSWORD" | tr -d '\\r\\n')
+
+                        echo "storePassword=$CLEAN_PASSWORD" > android/key.properties
+                        echo "keyPassword=$CLEAN_PASSWORD" >> android/key.properties
                         echo "keyAlias=upload" >> android/key.properties
                         echo "storeFile=upload-keystore.jks" >> android/key.properties
                         
