@@ -1,4 +1,4 @@
-package com.app.favouriteplaces_app_harsh
+package com.app.favouriteplaces
 
 import io.flutter.embedding.android.FlutterActivity
 

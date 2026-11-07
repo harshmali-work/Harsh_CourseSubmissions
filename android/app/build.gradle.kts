@@ -30,7 +30,7 @@ configure<com.android.build.api.dsl.ApplicationExtension> {
     }
 
     defaultConfig {
-        applicationId = "com.example.favouriteplaces_harsh"
+        applicationId = "com.app.favouriteplaces"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode.toInt()
