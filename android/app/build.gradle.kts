@@ -14,7 +14,7 @@ if (keystorePropertiesFile.exists()) {
 }
 
 configure<com.android.build.api.dsl.ApplicationExtension> {
-    namespace = "com.example.favouriteplaces"
+    namespace = "com.app.favouriteplaces"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
